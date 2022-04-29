@@ -1,11 +1,11 @@
 import React from 'react';
-import Sidebar from '../../components/sidebar/Sidebar';
+import ManageItem from '../../components/ManageItem/ManageItem';
 
 
 const ManageInventory = () => {
     return (
         <div>
-            <Sidebar />
+            <ManageItem />
         </div>
     );
 };

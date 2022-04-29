@@ -6,6 +6,8 @@ import About from "./Pages/About/About"
 import Blogs from "./Pages/Blogs/Blogs"
 import Contact from "./Pages/Contact/Contact"
 import AddItem from "./components/AddItem/AddItem";
+import ManageItem from "./components/ManageItem/ManageItem";
+import MyItem from "./components/MyItem/MyItem";
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path='/addInventory' element={<AddItem />} />
+        <Route path='/manageitem' element={<ManageItem />} />
+        <Route path='/myitem' element={<MyItem />} />
       </Routes>
     </div>
   );

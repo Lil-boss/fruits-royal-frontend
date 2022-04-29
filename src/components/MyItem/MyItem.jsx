@@ -1,13 +1,13 @@
 import React from 'react';
 import Sidebar from '../sidebar/Sidebar';
 
-const ManageItem = () => {
+const MyItem = () => {
     return (
         <div>
             <Sidebar />
-            manage item
+            my item
         </div>
     );
 };
 
-export default ManageItem;
+export default MyItem;
