@@ -2,21 +2,19 @@ import React from 'react';
 
 const Card = () => {
     return (
-        <div className='ml-8'>
-            <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <a href="/">
-                    <img className="rounded-t-lg" src="https://cdn.pixabay.com/photo/2020/06/01/22/23/eye-5248678__340.jpg" alt="" />
-                </a>
-                <div className="p-5">
-                    <a href="/">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">name</h5>
-                    </a>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Description</p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Price</p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Quantity</p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Supplier name</p>
-                    <button className='h-8 w-32 bg-red-800 rounded'>Manage</button>
+        <div className='mt-10'>
+            <div className='h-96 w-60 rounded-md relative border-y-2 border-rose-400'>
+                <div className='p-4 '>
+                    <img className=' h-40 w-full rounded-md' src="https://media.istockphoto.com/photos/red-apple-picture-id184276818?k=20&m=184276818&s=612x612&w=0&h=QxOcueqAUVTdiJ7DVoCu-BkNCIuwliPEgtAQhgvBA_g=" alt="" />
                 </div>
+                <div className='px-4'>
+                    <p>Name:Apple</p>
+                    <p>Description: good quality</p>
+                    <p>supplier: BoomBoom</p>
+                    <p>Quantity: 10 <sup className='text-red-500'>box</sup></p>
+                    <p>Price: 3000</p>
+                </div>
+                <button className='h-10 bg-orange-200 w-full absolute bottom-0 rounded-b-md'>Manage Item</button>
             </div>
         </div>
     );
