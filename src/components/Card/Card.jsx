@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ product }) => {
-
+    const navigate = useNavigate();
+    const handleItem = (id) => {
+        navigate(`/inventory/${id}`);
+    }
     return (
         <div className='mt-10'>
             <div className='h-96 w-60 rounded-md relative border-y-2 border-[#F62200]'>
                 <div className='p-4 '>
-                    <img className=' h-40 w-full rounded-md' src={product?.imageUrl} alt="" />
+                    <img className='h-40 w-full rounded-md' src={product?.imageUrl} alt="" />
                 </div>
                 <div className='px-4'>
                     <p>Name:{product?.productName}</p>
@@ -15,7 +19,9 @@ const Card = ({ product }) => {
                     <p>Quantity: {product?.quantity} <sup className='text-[#F62200]'>box</sup></p>
                     <p>Price: {product?.price}</p>
                 </div>
-                <button className='h-10 bg-[#FB9900] w-full absolute bottom-0 rounded-b-md text-white'>Manage Item</button>
+
+                <button onClick={() => handleItem(product?._id)} className='h-10 bg-[#FB9900] w-full absolute bottom-0 rounded-b-md text-white'>Manage Item</button>
+
             </div>
         </div>
     );
