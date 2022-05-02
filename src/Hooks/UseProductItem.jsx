@@ -1,15 +1,19 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const UseProductItem = () => {
     const [products, setProducts] = useState([]);
-    try {
-        const product = axios.get("");
-        setProducts(product);
-    } catch {
-        console.log("error");
-    }
+    useEffect(() => {
+        try {
+            axios.get("https://fruitsroyal.herokuapp.com/product")
+                .then(res => { setProducts(res.data) })
+        } catch {
+            console.log("error");
+        }
+    }, []);
+
     return [products, setProducts];
+
 };
 
 export default UseProductItem;
