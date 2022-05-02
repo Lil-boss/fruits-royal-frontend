@@ -7,6 +7,7 @@ import Blogs from "./Pages/Blogs/Blogs"
 import Contact from "./Pages/Contact/Contact"
 import AddItem from "./components/AddItem/AddItem";
 import ManageItem from "./components/ManageItem/ManageItem";
+import Modal from "./components/Modal/Modal"
 import MyItem from "./components/MyItem/MyItem";
 
 
@@ -16,7 +17,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/inventory/:productId" element={<ManageInventory />} />
+        <Route path="/inventory" element={<ManageInventory />} />
+        <Route path="/inventory/:productId" element={<Modal />} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
