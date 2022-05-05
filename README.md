@@ -10,7 +10,7 @@
 # Back Build with
 * Node js
 * Express js
-* Heroku
+* Heroku for live api
 # Database
 * MongoDB
 # Description
