@@ -1,12 +1,28 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import UseItem from '../../Hooks/UseItem';
 import { Link } from 'react-router-dom';
+import UseUpdateItem from '../../Hooks/UseUpdateItem';
 
 export default function Example() {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null);
     const [product] = UseItem();
+    const quantity = product?.quantity;
+
+    const [val, setVal] = useState();
+
+    useEffect(() => {
+        setVal(quantity)
+    }, [quantity]);
+
+    const handleDecrement = () => {
+        if (val > 1) {
+            setVal(val - 1);
+        }
+    }
+
+    console.log(quantity, val);
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -49,12 +65,11 @@ export default function Example() {
                                                 <img className='h-3/4 w-full rounded-md p-4' src={product?.imageUrl} alt="" />
                                             </div>
                                             <div className='p-8'>
-
-                                                <p className='text-2xl mt-4 '>Description: {product?.description}</p>
-                                                <p className='text-2xl mt-4 '>supplier: {product?.supplierName}</p>
-                                                <p className='text-2xl mt-4 '>Quantity: {product?.quantity} <sup className='text-red-600'>box</sup></p>
-                                                <p className='text-2xl mt-4 '>Price: {product?.price}</p>
-                                                <button className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Delivered</button>
+                                                <p className='text-1xl mt-4 '>Description: {product?.description}</p>
+                                                <p className='text-1xl mt-4 '>supplier: {product?.supplierName}</p>
+                                                <p id="quantity" className='text-1xl mt-4 ' >Quantity: <input value={val} type="text" className='w-10 outline-none' readOnly /> <sup className='text-red-600'>box</sup></p>
+                                                <p className='text-1xl mt-4 '>Price: {product?.price}</p>
+                                                <button onClick={handleDecrement} className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Delivered</button>
                                             </div>
                                         </div>
                                     </div>
