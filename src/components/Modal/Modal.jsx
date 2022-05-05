@@ -2,7 +2,6 @@ import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import UseItem from '../../Hooks/UseItem';
 import { Link } from 'react-router-dom';
-import UseUpdateItem from '../../Hooks/UseUpdateItem';
 
 export default function Example() {
     const [open, setOpen] = useState(true)
