@@ -1,10 +1,14 @@
 import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase/Firebase.init';
 import Loading from '../../Extra/Loading/Loading';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     const { register, handleSubmit } = useForm();
     const [signInWithGoogle, GoogleUser, googleLoading] = useSignInWithGoogle(auth);
     const [
@@ -29,7 +33,10 @@ const Login = () => {
         </div>;
     }
     if (user) {
-        console.log(user);
+        navigate(from, { replace: true });
+    }
+    if (GoogleUser) {
+        navigate(from, { replace: true });
     }
     if (error) {
         console.log(user);
