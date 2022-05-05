@@ -1,13 +1,28 @@
 import React from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/Firebase.init';
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const [signInWithGoogle, GoogleUser] = useSignInWithGoogle(auth);
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
     const onSubmit = data => {
+        const email = data.email;
+        const password = data.pass;
+        signInWithEmailAndPassword(email, password);
     };
+    if (user) {
+        console.log(user);
+    }
+    if (error) {
+        console.log(user);
+    }
     return (
         <div>
             <div className='w-2/5 mx-auto mt-8'>

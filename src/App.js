@@ -10,6 +10,7 @@ import ManageItem from "./components/ManageItem/ManageItem";
 import Modal from "./components/Modal/Modal"
 import MyItem from "./components/MyItem/MyItem";
 import Register from "./Pages/auth/Register/Register";
+import Login from "./Pages/auth/Login/Login";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/manageitem' element={<ManageItem />} />
         <Route path='/myitem' element={<MyItem />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </div>
   );
