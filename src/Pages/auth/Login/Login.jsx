@@ -2,14 +2,15 @@ import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/Firebase.init';
+import Loading from '../../Extra/Loading/Loading';
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    const [signInWithGoogle, GoogleUser] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, GoogleUser, googleLoading] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
         user,
-        loading,
+        userLoading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const onSubmit = data => {
@@ -17,6 +18,16 @@ const Login = () => {
         const password = data.pass;
         signInWithEmailAndPassword(email, password);
     };
+    if (userLoading) {
+        return <div>
+            <Loading />
+        </div>;
+    }
+    if (googleLoading) {
+        return <div>
+            <Loading />
+        </div>;
+    }
     if (user) {
         console.log(user);
     }

@@ -2,16 +2,27 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/Firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import Loading from '../../Extra/Loading/Loading';
 
 const Register = () => {
     const { register, handleSubmit } = useForm();
-    const [signInWithGoogle, GoogleUser] = useSignInWithGoogle(auth);
-    const [createUserWithEmailAndPassword, user, error] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, GoogleUser, googleLoading] = useSignInWithGoogle(auth);
+    const [createUserWithEmailAndPassword, user, userLoading, error] = useCreateUserWithEmailAndPassword(auth);
     const onSubmit = data => {
         const email = data.email;
         const password = data.pass;
         createUserWithEmailAndPassword(email, password);
     };
+    if (userLoading) {
+        return <div>
+            <Loading />
+        </div>;
+    }
+    if (googleLoading) {
+        return <div>
+            <Loading />
+        </div>;
+    }
     if (GoogleUser) {
         console.log(GoogleUser);
     }
