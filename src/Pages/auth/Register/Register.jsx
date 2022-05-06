@@ -11,7 +11,7 @@ const Register = () => {
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
     const { register, handleSubmit } = useForm();
-    const [signInWithGoogle, GoogleUser, googleLoading] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, GoogleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [createUserWithEmailAndPassword, user, userLoading, error] = useCreateUserWithEmailAndPassword(auth);
     const onSubmit = data => {
         const email = data.email;
@@ -37,7 +37,27 @@ const Register = () => {
         toast.success("Successfully Signed In", { id: "success" });
     }
     if (error) {
-        console.log(error);
+        if (error.message.includes("wrong-password")) {
+            toast.error("Password Not Matched", { id: "error" })
+        }
+    }
+
+    if (error) {
+        if (error.message.includes("user-not-found")) {
+            toast.error("User Invalid", { id: "error" })
+        }
+    }
+    if (error) {
+        if (error.message.includes("network-request-failed")) {
+            toast.error("Network failed", { id: "error" })
+        }
+    }
+
+    if (googleError) {
+        console.log(googleError);
+        if (googleError.message.includes("popup-closed-by-user")) {
+            toast.error("Popup Closed", { id: "error" })
+        }
     }
     return (
         <div>
