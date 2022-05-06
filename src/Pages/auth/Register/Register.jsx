@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import auth from '../../../Firebase/Firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import Loading from '../../Extra/Loading/Loading';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -29,9 +30,11 @@ const Register = () => {
     }
     if (GoogleUser) {
         navigate(from, { replace: true });
+        toast.success("Successfully Signed In", { id: "success" });
     }
     if (user) {
         navigate(from, { replace: true });
+        toast.success("Successfully Signed In", { id: "success" });
     }
     if (error) {
         console.log(error);
@@ -39,6 +42,7 @@ const Register = () => {
     return (
         <div>
             <div className='w-2/5 mx-auto mt-8'>
+                <h1 className='text-5xl text-center mb-5'>Register</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="relative z-0 w-full mb-6 group">
                         <input type="email" name='email' {...register("email", { required: true })} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
@@ -55,6 +59,7 @@ const Register = () => {
                         with Google
                     </button>
                 </div>
+                <p className='mt-8'>Already have an <Link className='text-[#FB9900]' to="/login">account!</Link></p>
             </div>
         </div>
     );

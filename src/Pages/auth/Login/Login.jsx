@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase/Firebase.init';
 import Loading from '../../Extra/Loading/Loading';
 
@@ -34,16 +35,19 @@ const Login = () => {
     }
     if (user) {
         navigate(from, { replace: true });
+        toast.success("Successfully Login", { id: "success" });
     }
     if (GoogleUser) {
         navigate(from, { replace: true });
+        toast.success("Successfully Login", { id: "success" });
     }
     if (error) {
         console.log(user);
     }
     return (
         <div>
-            <div className='w-2/5 mx-auto mt-8'>
+            <div className='w-2/5 mx-auto mt-8 '>
+                <h1 className='text-5xl text-center mb-5'>Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="relative z-0 w-full mb-6 group">
                         <input type="email" name='email' {...register("email", { required: true })} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
@@ -55,11 +59,12 @@ const Login = () => {
                     </div>
                     <button type="submit" className="text-white bg-[#FB9900] hover:bg-[#FB9900] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  dark:hover:bg-[#FB9900] ">Submit</button>
                 </form>
-                <div className='mt-10'>
-                    <button onClick={() => signInWithGoogle()} type="submit" className="w-48 h-10 rounded-md border-2">
-                        with Google
+                <div className='mt-10 '>
+                    <button onClick={() => signInWithGoogle()} type="submit" className="w-48 h-10 rounded-md border-2 bg-blue-600 text-white">
+                        Login with Google
                     </button>
                 </div>
+                <p className='mt-8'>Don't have any <Link className='text-[#FB9900]' to="/register">account?</Link></p>
             </div>
         </div>
     );

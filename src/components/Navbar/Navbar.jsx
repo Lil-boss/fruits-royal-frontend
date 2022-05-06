@@ -1,7 +1,19 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import auth from '../../Firebase/Firebase.init';
 
 const Navbar = () => {
+    const [user, loading, error] = useAuthState(auth);
+    const logout = () => {
+        signOut(auth).then(() => {
+            toast.success('Logged out successfully', { id: 'logout' });
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     return (
         <div className='w-4/5 mx-auto sticky top-0'>
             <nav className=" border-gray-200 px-2 sm:px-4 py-2.5 rounded mt-6">
@@ -31,12 +43,12 @@ const Navbar = () => {
                             <li>
                                 <Link to="/contact" className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-[#FB9900] md:hover:bg-transparent md:border-0 md:hover:text-[#FB9900] md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</Link>
                             </li>
-                            <li>
-                                <Link to="/register" className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-[#FB9900] md:hover:bg-transparent md:border-0 md:hover:text-[#FB9900] md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Register</Link>
-                            </li>
-                            <li>
+                            {user ? <li>
+                                <button onClick={logout} className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-[#FB9900] md:hover:bg-transparent md:border-0 md:hover:text-[#FB9900] md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</button>
+                            </li> : <li>
                                 <Link to="/login" className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-[#FB9900] md:hover:bg-transparent md:border-0 md:hover:text-[#FB9900] md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</Link>
-                            </li>
+                            </li>}
+
                         </ul>
                     </div>
                 </div>
