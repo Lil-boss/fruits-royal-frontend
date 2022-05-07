@@ -1,8 +1,7 @@
 import React from 'react';
 import ManageItem from '../../components/ManageItem/ManageItem';
-
-
 const ManageInventory = () => {
+
     return (
         <div>
             <ManageItem />

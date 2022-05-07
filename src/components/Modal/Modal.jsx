@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import UseItem from '../../Hooks/UseItem';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function Example() {
     const { productId } = useParams();
@@ -30,9 +31,9 @@ export default function Example() {
                     {
                         quantity: JSON.stringify(data)
                     })
-                    .then(res => { console.log(res.data); });
+                    .then(res => { toast.success("Delivered success", { id: "success" }); });
             } catch {
-                console.log("error");
+                toast.error("delivered failed", { id: "failed" })
             }
         }
     }

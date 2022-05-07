@@ -4,30 +4,24 @@ import { Link, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import UseProductItem from '../../Hooks/UseProductItem';
 
 export default function Example() {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null);
     const { id } = useParams();
-    const [products] = UseProductItem();
-    const previousQty = products?.quantity;
-    console.log(products);
-
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        const totalQty = parseInt(data.quantity) + parseInt(previousQty);
-        const qty = JSON.stringify(totalQty);
-        console.log(qty);
-        // try {
-        //     axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`,
-        //         {
-        //             quantity: qty
-        //         })
-        //         .then(res => { console.log(res.data); });
-        // } catch {
-        //     toast.error("Added failed", { id: "failed" });
-        // }
+        const qty = data.quantity
+
+        try {
+            axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`,
+                {
+                    quantity: qty
+                })
+                .then(res => { toast.success("Stock success", { id: "success" }); });
+        } catch {
+            toast.error("Added failed", { id: "failed" });
+        }
     };
     return (
         <Transition.Root show={open} as={Fragment}>
