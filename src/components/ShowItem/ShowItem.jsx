@@ -1,12 +1,18 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-const Card = ({ product }) => {
+const Card = ({ product, deleteItem }) => {
     const navigate = useNavigate();
+    const { productName, imageUrl } = product;
     const updateItem = (id) => {
         console.log(id);
         navigate(`/update/${id}`);
     }
-    const { productName, imageUrl } = product;
+    const viewItem = (id) => {
+        console.log(id);
+        navigate(`/show/${id}`);
+    }
+
     return (
         <div className='mt-10'>
             <div className="p-1 rounded-xl group sm:flex bg-white bg-opacity-50 shadow-xl hover:rounded-2xl">
@@ -19,9 +25,9 @@ const Card = ({ product }) => {
                             <p className='mt-2 text-2xl uppercase'>{productName}</p>
                         </div>
                         <div className='flex justify-between items-center'>
-                            <button className='ml-2 mt-2 text-[#FB9900]'>View</button>
+                            <button onClick={() => viewItem(product._id)} className='ml-2 mt-2 text-[#FB9900]'>View</button>
                             <button onClick={() => updateItem(product._id)} className='ml-2 mt-2 text-blue-700'>update</button>
-                            <button className='ml-2 mt-2 text-red-700'>delete</button>
+                            <button onClick={() => deleteItem(product._id)} className='ml-2 mt-2 text-red-700'>delete</button>
                         </div>
                     </div>
                 </div>

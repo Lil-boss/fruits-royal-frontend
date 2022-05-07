@@ -7,12 +7,15 @@ const UseItem = () => {
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        try {
-            axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${productId}`)
-                .then(res => { setProduct(res.data) })
-        } catch {
-            console.log("error");
+        const fetchData = async () => {
+            try {
+                axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${productId}`)
+                    .then(res => { setProduct(res.data) })
+            } catch {
+                console.log("error");
+            }
         }
+        fetchData();
     }, [productId]);
     return [product, setProduct];
 };

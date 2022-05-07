@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const logout = () => {
         signOut(auth).then(() => {
             toast.success('Logged out successfully', { id: 'logout' });

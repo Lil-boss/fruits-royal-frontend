@@ -14,6 +14,7 @@ import Login from "./Pages/auth/Login/Login";
 import RequireAuth from "./Pages/auth/RequiredAuth/RequireAuth"
 import ItemModal from "./components/ItemModal/ItemModal"
 import UpdateModal from "./components/UpdateModal/UpdateModal"
+import ShowModal from "./components/ShowModal/ShowModal"
 import { Toaster } from "react-hot-toast";
 
 
@@ -27,8 +28,9 @@ function App() {
         <Route path="/inventory" element={<RequireAuth>
           <ManageInventory />
         </RequireAuth>} />
-        <Route path="/inventory/:productId" element={<RequireAuth>
+        <Route path="/inventory/:productId" element={<RequireAuth>{
           <Modal />
+        }
         </RequireAuth>} />
         <Route path="/about" element={<About />} />
         <Route path="/blogs" element={<Blogs />} />
@@ -40,6 +42,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/item/:id' element={<ItemModal />} />
         <Route path='/update/:id' element={<UpdateModal />} />
+        <Route path='/show/:id' element={<ShowModal />} />
       </Routes>
     </div>
   );

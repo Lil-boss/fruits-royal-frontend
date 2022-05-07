@@ -2,11 +2,19 @@ import React from 'react';
 import Sidebar from '../sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import toast from 'react-hot-toast';
 const AddItem = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        axios.post("https://fruitsroyal.herokuapp.com/api/products", data)
-            .then(res => { console.log(res); })
+        const fetchData = async () => {
+            try {
+                await axios.post("https://fruitsroyal.herokuapp.com/api/product", data)
+                    .then(res => { toast.success("Added success", { id: "success" }) })
+            } catch {
+                toast.error("Added failed", { id: "failed" })
+            }
+        }
+        fetchData()
     };
     return (
         <div >
