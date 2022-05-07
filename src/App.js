@@ -13,6 +13,7 @@ import Register from "./Pages/auth/Register/Register";
 import Login from "./Pages/auth/Login/Login";
 import RequireAuth from "./Pages/auth/RequiredAuth/RequireAuth"
 import ItemModal from "./components/ItemModal/ItemModal"
+import UpdateModal from "./components/UpdateModal/UpdateModal"
 import { Toaster } from "react-hot-toast";
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/item/:id' element={<ItemModal />} />
+        <Route path='/update/:id' element={<UpdateModal />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,11 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const Card = ({ product }) => {
-    console.log(product);
+    const navigate = useNavigate();
+    const updateItem = (id) => {
+        console.log(id);
+        navigate(`/update/${id}`);
+    }
     const { productName, imageUrl } = product;
     return (
         <div className='mt-10'>
@@ -16,7 +20,7 @@ const Card = ({ product }) => {
                         </div>
                         <div className='flex justify-between items-center'>
                             <button className='ml-2 mt-2 text-[#FB9900]'>View</button>
-                            <button className='ml-2 mt-2 text-blue-700'>update</button>
+                            <button onClick={() => updateItem(product._id)} className='ml-2 mt-2 text-blue-700'>update</button>
                             <button className='ml-2 mt-2 text-red-700'>delete</button>
                         </div>
                     </div>
