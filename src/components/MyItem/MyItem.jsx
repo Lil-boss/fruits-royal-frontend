@@ -3,10 +3,8 @@ import Sidebar from '../sidebar/Sidebar';
 import auth from '../../Firebase/Firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 const MyItem = () => {
-    const navigate = useNavigate();
     const [user] = useAuthState(auth);
     const [products, setProducts] = useState([]);
 
@@ -16,7 +14,7 @@ const MyItem = () => {
                 await axios.get(`https://fruitsroyal.herokuapp.com/api/product/${user.email}`)
                     .then(res => setProducts(res.data))
             } catch {
-                console.log('error');
+                toast.error("Failed to fetch data", { id: "failed" })
             }
         }
         fetchData();

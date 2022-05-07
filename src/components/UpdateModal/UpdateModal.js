@@ -11,7 +11,6 @@ export default function Example() {
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null);
     const onSubmit = data => {
-        console.log(data);
         try {
             axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`, data)
                 .then(res => { toast.success("update success", res, { id: "success" }); });
@@ -19,7 +18,6 @@ export default function Example() {
             toast.error("update failed", { id: "failed" })
         }
     };
-    console.log(id);
 
     return (
         <Transition.Root show={open} as={Fragment}>

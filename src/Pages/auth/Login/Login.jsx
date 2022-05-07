@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -18,10 +19,14 @@ const Login = () => {
         userLoading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         const email = data.email;
         const password = data.pass;
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
+        axios.post('https://fruitsroyal.herokuapp.com/api/auth', {
+            email: email
+        }).then(res => { localStorage.setItem('accessToken', res.data.accessToken) });
+
     };
     if (userLoading) {
         return <div>
@@ -37,6 +42,7 @@ const Login = () => {
         navigate(from, { replace: true });
         toast.success("Successfully Login", { id: "success" });
     }
+
     if (GoogleUser) {
         navigate(from, { replace: true });
         toast.success("Successfully Login", { id: "success" });
@@ -59,7 +65,6 @@ const Login = () => {
     }
 
     if (googleError) {
-        console.log(googleError);
         if (googleError.message.includes("popup-closed-by-user")) {
             toast.error("Popup Closed", { id: "error" })
         }
@@ -84,8 +89,8 @@ const Login = () => {
                         Login with Google
                     </button>
                 </div>
-                <p className='mt-8'>Forget <Link className='text-[#FB9900]' to="/forgetpass">Password?</Link></p>
-                <p className='mt-8'>Don't have any <Link className='text-[#FB9900]' to="/register">account?</Link></p>
+                <p className='mt-8'>Forget <Link to="/forgetpass" className='text-[#FB9900]'>Password?</Link></p>
+                <p className='mt-8'>Don't have any <Link to="/register" className='text-[#FB9900]' >account?</Link></p>
             </div>
         </div>
     );

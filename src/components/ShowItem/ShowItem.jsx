@@ -5,11 +5,9 @@ const Card = ({ product, deleteItem }) => {
     const navigate = useNavigate();
     const { productName, imageUrl } = product;
     const updateItem = (id) => {
-        console.log(id);
         navigate(`/update/${id}`);
     }
     const viewItem = (id) => {
-        console.log(id);
         navigate(`/show/${id}`);
     }
     return (

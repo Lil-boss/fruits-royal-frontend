@@ -45,7 +45,6 @@ export default function Example() {
         submited();
     }
     const updateItem = (id) => {
-        console.log(id);
         navigate(`/item/${id}`);
     }
     return (

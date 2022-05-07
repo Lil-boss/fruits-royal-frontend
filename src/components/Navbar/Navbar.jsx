@@ -11,7 +11,7 @@ const Navbar = () => {
         signOut(auth).then(() => {
             toast.success('Logged out successfully', { id: 'logout' });
         }).catch((error) => {
-            console.log(error);
+            toast.error("not logout", { id: 'logout' });
         });
     }
     return (

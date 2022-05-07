@@ -14,7 +14,6 @@ const ForgetPassword = () => {
     const onSubmit = data => {
         const fetchData = async () => {
             const email = data.email;
-            console.log(email);
             await sendPasswordResetEmail(email);
             toast.success("Email Sent", { id: "success" });
         }

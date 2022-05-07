@@ -5,6 +5,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-fi
 import Loading from '../../Extra/Loading/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -13,10 +14,13 @@ const Register = () => {
     const { register, handleSubmit } = useForm();
     const [signInWithGoogle, GoogleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [createUserWithEmailAndPassword, user, userLoading, error] = useCreateUserWithEmailAndPassword(auth);
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         const email = data.email;
         const password = data.pass;
-        createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password);
+        axios.post('https://fruitsroyal.herokuapp.com/api/auth', {
+            email: email
+        }).then(res => { localStorage.setItem('accessToken', res.data.accessToken) });
     };
     if (userLoading) {
         return <div>
@@ -54,7 +58,6 @@ const Register = () => {
     }
 
     if (googleError) {
-        console.log(googleError);
         if (googleError.message.includes("popup-closed-by-user")) {
             toast.error("Popup Closed", { id: "error" })
         }
