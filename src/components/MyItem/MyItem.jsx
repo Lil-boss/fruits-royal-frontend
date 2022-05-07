@@ -42,16 +42,16 @@ const MyItem = () => {
     return (
         <div>
             <Sidebar />
-            <div className='grid grid-cols-3 gap-2'>
+            <div className='grid md:grid-cols-3 gap-2'>
                 {
                     products.map(product =>
-                        <div className='w-4/5 mx-auto mt-8'>
+                        <div className='w-4/5 mx-auto my-8'>
                             <div className="max-w-sm p-1 rounded-xl group sm:flex bg-white bg-opacity-50 shadow-xl hover:rounded-2xl">
                                 <div className='grid grid-cols-2'>
                                     <div>
                                         <img src={product?.imageUrl} alt="art cover" loading="lazy" width="1000" height="667" className=" sm:h-full w-full sm:w-5/12 object-cover object-top rounded-lg transition duration-500 group-hover:rounded-xl" />
                                     </div>
-                                    <div className='flex flex-col items-start'>
+                                    <div className='md:flex flex-col items-start'>
                                         <div>
                                             <p className='mt-2 text-sm uppercase'>Name: {product?.productName}</p>
                                             <p className='mt-2 text-sm uppercase'>Des: {product?.description}</p>

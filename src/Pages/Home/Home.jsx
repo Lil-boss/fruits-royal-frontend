@@ -14,7 +14,7 @@ const Home = () => {
                 <div className='my-8'>
                     <h1 className='text-3xl text-center font-medium'>Latest Products </h1>
                 </div>
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='grid sm:grid-cols-1 justify-items-center md:grid-cols-3 gap-4'>
                     {
                         items.map(product => { return <Card key={product._id} product={product} /> })
                     }

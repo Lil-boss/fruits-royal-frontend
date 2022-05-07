@@ -11,13 +11,13 @@ const Card = ({ product, deleteItem }) => {
         navigate(`/show/${id}`);
     }
     return (
-        <div className='mt-10'>
+        <div className='my-10'>
             <div className="p-1 rounded-xl group sm:flex bg-white bg-opacity-50 shadow-xl hover:rounded-2xl">
-                <div className='grid grid-cols-2'>
+                <div className='grid md:grid-cols-2'>
                     <div>
                         <img src={imageUrl} alt="art cover" loading="lazy" width="1000" height="667" className=" sm:h-full w-full sm:w-5/12 object-cover object-top rounded-lg transition duration-500 group-hover:rounded-xl" />
                     </div>
-                    <div className='flex flex-col items-start'>
+                    <div className='flex md:flex-col items-start'>
                         <div>
                             <p className='mt-2 text-2xl uppercase'>{productName}</p>
                         </div>

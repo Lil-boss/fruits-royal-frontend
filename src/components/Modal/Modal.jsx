@@ -83,14 +83,14 @@ export default function Example() {
                                         <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                                             {product?.productName}
                                         </Dialog.Title>
-                                        <div className='grid grid-cols-2 gap-3 '>
+                                        <div className='grid sm:grid-cols-1 justify-items-center md:grid-cols-2 gap-3 '>
                                             <div>
                                                 <img className='h-3/4 w-full rounded-md p-4' src={product?.imageUrl} alt="" />
                                             </div>
                                             <div className='p-8'>
                                                 <p className='text-1xl mt-4 '>Description: {product?.description}</p>
                                                 <p className='text-1xl mt-4 '>supplier: {product?.supplierName}</p>
-                                                <p id="quantity" className='text-1xl mt-4 flex'>Quantity:<input value={val} onInput={e => setVal(e.target.value)} className='w-10 outline-none' readOnly /><sup className='text-red-600'>box</sup></p>
+                                                <p id="quantity" className='text-1xl mt-4 md:flex'>Quantity:<input value={val} onInput={e => setVal(e.target.value)} className='w-10 outline-none' readOnly /><sup className='text-red-600'>box</sup></p>
                                                 <p className='text-1xl mt-4 '>Price: {product?.price}</p>
                                                 <div className='flex'>
                                                     <button onClick={process} className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Delivered</button>
