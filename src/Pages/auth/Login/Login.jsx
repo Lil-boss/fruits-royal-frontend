@@ -84,6 +84,7 @@ const Login = () => {
                         Login with Google
                     </button>
                 </div>
+                <p className='mt-8'>Forget <Link className='text-[#FB9900]' to="/forgetpass">Password?</Link></p>
                 <p className='mt-8'>Don't have any <Link className='text-[#FB9900]' to="/register">account?</Link></p>
             </div>
         </div>

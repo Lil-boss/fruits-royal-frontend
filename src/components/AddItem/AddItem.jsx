@@ -3,12 +3,24 @@ import Sidebar from '../sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import auth from '../../Firebase/Firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 const AddItem = () => {
+    const [user] = useAuthState(auth);
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         const fetchData = async () => {
             try {
-                await axios.post("https://fruitsroyal.herokuapp.com/api/product", data)
+                await axios.post("https://fruitsroyal.herokuapp.com/api/product", {
+                    email: user.email,
+                    productName: data.productName,
+                    description: data.description,
+                    imageUrl: data.imageUrl,
+                    supplierName: data.supplierName,
+                    quantity: data.quantity,
+                    phoneNumber: data.phoneNumber,
+                    price: data.price
+                })
                     .then(res => { toast.success("Added success", { id: "success" }) })
             } catch {
                 toast.error("Added failed", { id: "failed" })

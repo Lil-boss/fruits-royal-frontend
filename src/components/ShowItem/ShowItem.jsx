@@ -12,7 +12,6 @@ const Card = ({ product, deleteItem }) => {
         console.log(id);
         navigate(`/show/${id}`);
     }
-
     return (
         <div className='mt-10'>
             <div className="p-1 rounded-xl group sm:flex bg-white bg-opacity-50 shadow-xl hover:rounded-2xl">
@@ -33,7 +32,6 @@ const Card = ({ product, deleteItem }) => {
                 </div>
             </div>
         </div>
-
     );
 
 };

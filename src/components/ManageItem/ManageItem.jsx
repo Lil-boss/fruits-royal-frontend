@@ -7,7 +7,6 @@ import axios from 'axios';
 const ManageItem = () => {
     const [products, setProducts] = UseProductItem();
     const deleteItem = (id) => {
-
         const fetchData = async () => {
             const confirm = window.confirm("Are you sure you want to delete this item?");
             if (confirm) {

@@ -16,6 +16,7 @@ import ItemModal from "./components/ItemModal/ItemModal"
 import UpdateModal from "./components/UpdateModal/UpdateModal"
 import ShowModal from "./components/ShowModal/ShowModal"
 import { Toaster } from "react-hot-toast";
+import ForgetPassword from "./Pages/auth/ForgetPassword/ForgetPassword";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path='/item/:id' element={<ItemModal />} />
         <Route path='/update/:id' element={<UpdateModal />} />
         <Route path='/show/:id' element={<ShowModal />} />
+        <Route path='/forgetpass' element={<ForgetPassword />} />
       </Routes>
     </div>
   );

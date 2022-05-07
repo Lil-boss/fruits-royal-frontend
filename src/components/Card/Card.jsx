@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Card = ({ product }) => {
     const navigate = useNavigate();
     const handleItem = (id) => {
-        navigate(`/show/${id}`);
+        navigate(`/inventory/${id}`);
     }
     return (
         <div className='mt-10'>
@@ -19,7 +19,6 @@ const Card = ({ product }) => {
                     <p>Quantity: {product?.quantity} <sup className='text-[#F62200]'>box</sup></p>
                     <p>Price: {product?.price}</p>
                 </div>
-
                 <button onClick={() => handleItem(product?._id)} className='h-10 bg-[#FB9900] w-full absolute bottom-0 rounded-b-md text-white'>Manage Item</button>
 
             </div>
