@@ -5,7 +5,7 @@ import axios from 'axios';
 const AddItem = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        axios.post("https://fruitsroyal.herokuapp.com/products", data)
+        axios.post("https://fruitsroyal.herokuapp.com/api/products", data)
             .then(res => { console.log(res); })
     };
     return (

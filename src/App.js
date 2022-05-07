@@ -12,6 +12,7 @@ import MyItem from "./components/MyItem/MyItem";
 import Register from "./Pages/auth/Register/Register";
 import Login from "./Pages/auth/Login/Login";
 import RequireAuth from "./Pages/auth/RequiredAuth/RequireAuth"
+import ItemModal from "./components/ItemModal/ItemModal"
 import { Toaster } from "react-hot-toast";
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/myitem' element={<MyItem />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/item/:id' element={<ItemModal />} />
       </Routes>
     </div>
   );

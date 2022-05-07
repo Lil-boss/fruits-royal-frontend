@@ -1,50 +1,34 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import UseItem from '../../Hooks/UseItem';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import UseProductItem from '../../Hooks/UseProductItem';
 
 export default function Example() {
-    const { productId } = useParams();
-    const navigate = useNavigate();
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null);
-    const [product] = UseItem();
-    const quantity = product?.quantity;
-    const [val, setVal] = useState();
-    useEffect(() => {
-        setVal(quantity)
-    }, [quantity]);
+    const { id } = useParams();
+    const [products] = UseProductItem();
+    const previousQty = products?.quantity;
+    console.log(products);
 
-    const handleDecrement = () => {
-        if (val > 0) {
-            setVal(parseInt(val) - 1);
-        }
-    }
-    const submited = () => {
-        if (val > 0) {
-            const data = val - 1
-            console.log(data);
-            try {
-                axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${productId}`,
-                    {
-                        quantity: JSON.stringify(data)
-                    })
-                    .then(res => { console.log(res.data); });
-            } catch {
-                console.log("error");
-            }
-        }
-    }
-
-    const process = () => {
-        handleDecrement()
-        submited();
-    }
-    const updateItem = (id) => {
-        console.log(id);
-        navigate(`/item/${id}`);
-    }
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => {
+        const totalQty = parseInt(data.quantity) + parseInt(previousQty);
+        const qty = JSON.stringify(totalQty);
+        console.log(qty);
+        // try {
+        //     axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`,
+        //         {
+        //             quantity: qty
+        //         })
+        //         .then(res => { console.log(res.data); });
+        // } catch {
+        //     toast.error("Added failed", { id: "failed" });
+        // }
+    };
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -79,21 +63,17 @@ export default function Example() {
                                 <div className="sm:flex sm:items-start">
                                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                                            {product?.productName}
                                         </Dialog.Title>
                                         <div className='grid grid-cols-2 gap-3 '>
-                                            <div>
-                                                <img className='h-3/4 w-full rounded-md p-4' src={product?.imageUrl} alt="" />
-                                            </div>
                                             <div className='p-8'>
-                                                <p className='text-1xl mt-4 '>Description: {product?.description}</p>
-                                                <p className='text-1xl mt-4 '>supplier: {product?.supplierName}</p>
-                                                <p id="quantity" className='text-1xl mt-4 flex'>Quantity:<input value={val} onInput={e => setVal(e.target.value)} className='w-10 outline-none' readOnly /><sup className='text-red-600'>box</sup></p>
-                                                <p className='text-1xl mt-4 '>Price: {product?.price}</p>
-                                                <div className='flex'>
-                                                    <button onClick={process} className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Delivered</button>
-                                                    <button onClick={() => updateItem(product?._id)} className='mx-2 h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Restock</button>
-                                                </div>
+                                                <p>Add Quantity</p>
+                                                <form onSubmit={handleSubmit(onSubmit)}>
+                                                    <div className="relative z-0 w-full mb-6 group">
+                                                        <input {...register("quantity", { required: true })} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="" />
+                                                        <label htmlFor="productName" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity</label>
+                                                    </div>
+                                                    <button className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Stock</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +81,7 @@ export default function Example() {
                             </div>
                             {/* button area */}
                             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <Link to="/">
+                                <Link to={`/inventory/${id}`}>
                                     <button
                                         type="button"
                                         className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"

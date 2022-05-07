@@ -5,7 +5,7 @@ const UseProductItem = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
         try {
-            axios.get("https://fruitsroyal.herokuapp.com/product")
+            axios.get("https://fruitsroyal.herokuapp.com/api/product")
                 .then(res => { setProducts(res.data) })
         } catch {
             console.log("error");

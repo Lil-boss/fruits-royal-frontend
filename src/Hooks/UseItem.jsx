@@ -8,7 +8,7 @@ const UseItem = () => {
 
     useEffect(() => {
         try {
-            axios.get(`https://fruitsroyal.herokuapp.com/inventory/${productId}`)
+            axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${productId}`)
                 .then(res => { setProduct(res.data) })
         } catch {
             console.log("error");

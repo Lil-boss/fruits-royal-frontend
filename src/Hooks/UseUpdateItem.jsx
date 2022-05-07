@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const UseUpdateItem = () => {
     const { productId } = useParams({});
-    const [updates, setUpdates] = useState();
+    const [updates, setUpdates] = useState({});
     useEffect(() => {
         try {
             axios.put(`https://fruitsroyal.herokuapp.com/inventory/${productId}`)
