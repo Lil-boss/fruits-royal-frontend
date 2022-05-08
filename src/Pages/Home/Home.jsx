@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Banner from '../../components/Banner/Banner';
 import Card from '../../components/Card/Card';
 import UseProductItem from '../../Hooks/UseProductItem';
@@ -19,7 +20,23 @@ const Home = () => {
                         items.map(product => { return <Card key={product._id} product={product} /> })
                     }
                 </div>
+                <div className='my-10 p-6'>
+                    <div className='grid grid-cols-2 gap-2'>
+                        <div>
+                            <img src="https://chaldn.com/_mpimage/fruits-vegetables?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D23769&q=low&v=1" alt="" />
+                        </div>
+                        <div className='flex flex-col justify-center items-start'>
+                            <h2 className='text-4xl '>Why</h2>
+                            <h1 className='text-6xl font-light'>Fruits Royal?</h1>
+                            <p className='text-md font-thin mt-8'>We shorten the time between the farm and your table. Our motto is to deliver the local food which is better, fresher and tastier. The wholesale prices that farmers get for their products are low, often near the cost of production. It is an investment in the future. By supporting local farmers today, we are helping to ensure that there will be farms in our community tomorrow!</p>
+                            <Link to="/">
+                                <button className='my-10 bg-[#FB9900] p-4 rounded-md text-white'>Lear more..</button></Link>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
             <Footer />
         </div>
     );

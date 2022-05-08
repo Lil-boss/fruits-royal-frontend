@@ -17,7 +17,7 @@ const Register = () => {
     const onSubmit = async (data) => {
         const email = data.email;
         const password = data.pass;
-        await createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password, { sendEmailVerification: true });
         axios.post('https://fruitsroyal.herokuapp.com/api/auth', {
             email: email
         }).then(res => { localStorage.setItem('accessToken', res.data.accessToken) });
