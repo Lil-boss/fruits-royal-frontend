@@ -7,7 +7,7 @@ import axios from 'axios';
 import Pagination from '../Pagination/Pagination';
 const ManageItem = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [postPerPage, setPostPerPage] = useState(10);
+    const [postPerPage] = useState(10);
     const [products, setProducts] = UseProductItem();
     const deleteItem = (id) => {
         const fetchData = async () => {
