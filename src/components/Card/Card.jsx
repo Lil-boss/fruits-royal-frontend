@@ -8,7 +8,7 @@ const Card = ({ product }) => {
     }
     return (
         <div className='mt-10'>
-            <div className='h-96 w-60 rounded-md relative border-y-2 border-[#F62200]'>
+            <div className='h-96 w-60 rounded-md relative border-y-2 border-[#F62200] animate__animated  animate__fadeInUp'>
                 <div className='p-4 '>
                     <img className='h-40 w-full rounded-md' src={product?.imageUrl} alt="" />
                 </div>

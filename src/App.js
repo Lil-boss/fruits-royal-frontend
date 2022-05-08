@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import 'animate.css';
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import ManageInventory from "./Pages/manageInventory/ManageInventory";

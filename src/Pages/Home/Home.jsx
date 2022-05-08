@@ -13,7 +13,7 @@ const Home = () => {
             <Banner />
             <div className='w-4/5 mx-auto'>
                 <div className='my-8'>
-                    <h1 className='text-3xl text-center font-medium'>Latest Products </h1>
+                    <h1 className='text-3xl text-center font-medium animate__animated  animate__fadeInUp'>Latest Products </h1>
                 </div>
                 <div className='grid sm:grid-cols-1 justify-items-center md:grid-cols-3 gap-4'>
                     {
@@ -21,7 +21,7 @@ const Home = () => {
                     }
                 </div>
                 <div className='my-10 p-6'>
-                    <div className='grid grid-cols-2 gap-2'>
+                    <div className='grid grid-cols-2 gap-2 animate__animated  animate__fadeInUp'>
                         <div>
                             <img src="https://chaldn.com/_mpimage/fruits-vegetables?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D23769&q=low&v=1" alt="" />
                         </div>
