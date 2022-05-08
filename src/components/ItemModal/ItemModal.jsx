@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Link, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -10,14 +10,33 @@ export default function Example() {
     const cancelButtonRef = useRef(null);
     const { id } = useParams();
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => {
-        const qty = data.quantity
-
-        try {
-            axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`,
-                {
-                    quantity: qty
+    const [qty, setQty] = useState({});
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
                 })
+                    .then(res => { setQty(res.data) })
+            } catch {
+                toast.error('Something went wrong', { id: "wrong" });
+            }
+        }
+        fetchData();
+    }, [id]);
+
+
+    const onSubmit = data => {
+        const previousQty = Number(qty.quantity);
+        const newQty = Number(data.quantity);
+        const totalQty = previousQty + newQty;
+        const newQtyObj = JSON.stringify(totalQty);
+        try {
+            axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`, {
+                quantity: newQtyObj
+            })
                 .then(res => { toast.success("Stock success", { id: "success" }); });
         } catch {
             toast.error("Added failed", { id: "failed" });
