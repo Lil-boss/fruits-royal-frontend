@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 const MyItem = () => {
     const [user] = useAuthState(auth);
     const [products, setProducts] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -25,7 +24,11 @@ const MyItem = () => {
             const confirm = window.confirm("Are you sure you want to delete this item?");
             if (confirm) {
                 try {
-                    await axios.delete(`https://fruitsroyal.herokuapp.com/api/product/${id}`)
+                    await axios.delete(`https://fruitsroyal.herokuapp.com/api/product/${id}`, {
+                        headers: {
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    })
                         .then(res => {
                             toast.success("delete success", { id: "success" })
                         });
@@ -68,6 +71,7 @@ const MyItem = () => {
                         </div>
                     )}
             </div>
+
         </div>
     );
 };
