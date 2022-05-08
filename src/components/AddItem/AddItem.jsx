@@ -10,6 +10,9 @@ const AddItem = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         const fetchData = async () => {
+            const pricePerUnit = Number(data.price);
+            const quantity = Number(data.quantity);
+            let totalPrice = pricePerUnit * quantity;
             try {
                 await axios.post("https://fruitsroyal.herokuapp.com/api/product", {
                     email: user.email,
@@ -19,7 +22,8 @@ const AddItem = () => {
                     supplierName: data.supplierName,
                     quantity: data.quantity,
                     phoneNumber: data.phoneNumber,
-                    price: data.price
+                    price: data.price,
+                    totalPrice: JSON.stringify(totalPrice)
                 })
                     .then(res => { toast.success("Added success", { id: "success" }) })
             } catch {

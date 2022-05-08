@@ -14,11 +14,7 @@ const ManageItem = () => {
             const confirm = window.confirm("Are you sure you want to delete this item?");
             if (confirm) {
                 try {
-                    await axios.delete(`https://fruitsroyal.herokuapp.com/api/product/${id}`, {
-                        headers: {
-                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                        }
-                    })
+                    await axios.delete(`https://fruitsroyal.herokuapp.com/api/product/${id}`)
                         .then(res => {
                             toast.success("delete success", { id: "success" })
                         });

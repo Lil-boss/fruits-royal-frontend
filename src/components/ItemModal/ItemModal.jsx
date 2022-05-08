@@ -14,11 +14,7 @@ export default function Example() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`, {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                    }
-                })
+                axios.get(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`)
                     .then(res => { setQty(res.data) })
             } catch {
                 toast.error('Something went wrong', { id: "wrong" });
@@ -32,10 +28,13 @@ export default function Example() {
         const previousQty = Number(qty.quantity);
         const newQty = Number(data.quantity);
         const totalQty = previousQty + newQty;
+        const previousPrice = Number(qty.price) * totalQty;
+        const totalPrice = JSON.stringify(previousPrice);
         const newQtyObj = JSON.stringify(totalQty);
         try {
             axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${id}`, {
-                quantity: newQtyObj
+                quantity: newQtyObj,
+                totalPrice: totalPrice
             })
                 .then(res => { toast.success("Stock success", { id: "success" }); });
         } catch {

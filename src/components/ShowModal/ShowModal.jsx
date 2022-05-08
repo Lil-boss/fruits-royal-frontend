@@ -66,7 +66,8 @@ export default function Example() {
                                                 <p className='text-1xl mt-4 '>Description: {product?.description}</p>
                                                 <p className='text-1xl mt-4 '>supplier: {product?.supplierName}</p>
                                                 <p id="quantity" className='text-1xl mt-4 flex'>Quantity:{product?.quantity}<sup className='text-red-600'>box</sup></p>
-                                                <p className='text-1xl mt-4 '>Price: {product?.price}</p>
+                                                <p className='text-1xl mt-4 '>Price: {product?.price}<sup className='text-red-600'>per</sup></p>
+                                                <p className='text-1xl mt-4 '>Total: {product?.totalPrice}</p>
                                             </div>
                                         </div>
                                     </div>

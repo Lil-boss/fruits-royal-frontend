@@ -10,8 +10,10 @@ export default function Example() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(true)
     const cancelButtonRef = useRef(null);
-    const [product] = UseItem();
+    const [product, setProduct] = UseItem();
     const quantity = product?.quantity;
+    let previousPrice = Number(product?.price)
+    let totalPrice
     const [val, setVal] = useState();
     useEffect(() => {
         setVal(quantity)
@@ -25,13 +27,15 @@ export default function Example() {
     const submited = () => {
         if (val > 0) {
             const data = val - 1;
+            totalPrice = previousPrice * data;
             const fetchData = async () => {
                 try {
                     await axios.put(`https://fruitsroyal.herokuapp.com/api/inventory/${productId}`,
                         {
-                            quantity: JSON.stringify(data)
+                            quantity: JSON.stringify(data),
+                            totalPrice: JSON.stringify(totalPrice)
                         })
-                        .then(res => { toast.success("Delivered success", { id: "success" }); });
+                        .then(res => { setProduct(res.data); toast.success("Delivered success", { id: "success" }); });
                 } catch {
                     toast.error("delivered failed", { id: "failed" })
                 }
@@ -91,7 +95,8 @@ export default function Example() {
                                                 <p className='text-1xl mt-4 '>Description: {product?.description}</p>
                                                 <p className='text-1xl mt-4 '>supplier: {product?.supplierName}</p>
                                                 <p id="quantity" className='text-1xl mt-4 md:flex'>Quantity:<input value={val} onInput={e => setVal(e.target.value)} className='w-10 outline-none' readOnly /><sup className='text-red-600'>box</sup></p>
-                                                <p className='text-1xl mt-4 '>Price: {product?.price}</p>
+                                                <p className='text-1xl mt-4 '>Price: {product?.price}<sup className='text-red-600'>per</sup></p>
+                                                <p className='text-1xl mt-4 '>Total: {product?.totalPrice}</p>
                                                 <div className='flex'>
                                                     <button onClick={process} className='h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Delivered</button>
                                                     <button onClick={() => updateItem(product?._id)} className='mx-2 h-10 w-24 bg-[#FB9900] rounded-md text-white mt-10'>Restock</button>
