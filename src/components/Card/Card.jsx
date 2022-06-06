@@ -20,7 +20,6 @@ const Card = ({ product }) => {
                     <p>Price: {product?.price}<sup className='text-[#F62200]'>per</sup></p>
                 </div>
                 <button onClick={() => handleItem(product?._id)} className='h-10 bg-[#FB9900] w-full absolute bottom-0 rounded-b-md text-white'>Manage Item</button>
-
             </div>
         </div>
     );
